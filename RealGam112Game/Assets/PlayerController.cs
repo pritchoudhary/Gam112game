@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public GameObject winElements;
 
     float maxRot = 55;
-    float minRot = 305;
+    float minRot = 315;
 
 
     // Use this for initialization
@@ -195,17 +195,18 @@ public class PlayerController : MonoBehaviour
             rWheel1.motorTorque = motorMax * -motor;
             rWheel2.motorTorque = motorMax * -motor;
 
-            if (playerCar.transform.eulerAngles.x > 55 && playerCar.transform.eulerAngles.x < 304)
+            if (playerCar.transform.eulerAngles.x > 55 && playerCar.transform.eulerAngles.x < 300)
             {
                 playerCar.transform.rotation = Quaternion.Euler(maxRot, 90, 0);
                 motorRb.AddForce(-motorRb.transform.up * 100);
                 //Debug.Log("working");
             }
-            else if (playerCar.transform.eulerAngles.x < 305 && playerCar.transform.eulerAngles.x > 56)
-            {
-                playerCar.transform.rotation = Quaternion.Euler(minRot, 90, 0);
-            }
-        }        
+            playerCar.transform.rotation = Quaternion.Euler(playerCar.transform.eulerAngles.x, 90, 0);
+            //if (playerCar.transform.eulerAngles.x < minRot && playerCar.transform.eulerAngles.x > 180)
+            //{
+            //    playerCar.transform.rotation = Quaternion.Euler(minRot, 90, 0);
+            //}
+        }
     }
 
     public void RestartGame()
