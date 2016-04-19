@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
             rWheel1.motorTorque = motorMax * -motor;
             rWheel2.motorTorque = motorMax * -motor;
 
-            if (playerCar.transform.eulerAngles.x > 55 && playerCar.transform.eulerAngles.x < 300)
+            if (playerCar.transform.eulerAngles.x > 55 && playerCar.transform.eulerAngles.x < 290)
             {
                 playerCar.transform.rotation = Quaternion.Euler(maxRot, 90, 0);
                 motorRb.AddForce(-motorRb.transform.up * 100);
