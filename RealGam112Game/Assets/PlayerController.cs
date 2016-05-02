@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     public float acceleration = 0f;
     public float normalizing = 0f;
+    public float sliderNormal = 0f;
 
     private Vector3 cameraPos;
     public float cameraDistance = 10;
@@ -70,6 +71,22 @@ public class PlayerController : MonoBehaviour
         //    playerCar.transform.position = newPos;
         //}
 
+        sliderNormal = ((VelocitySlider.value - 0)/ (VelocitySlider.maxValue - 0));
+
+        if (sliderNormal > 0.2)
+        {
+            if (rb.mass > 40)
+            {
+                rb.mass = 55 * sliderNormal;
+                motorRb.mass = 55 * sliderNormal;
+            }
+            else
+            {
+                rb.mass = 40;
+                motorRb.mass = 40;
+            }
+        }
+        
         normalizing = 100 / VelocitySlider.maxValue;
         acceleration = VelocitySlider.value * normalizing;
         //Debug.Log(acceleration);
@@ -166,11 +183,12 @@ public class PlayerController : MonoBehaviour
             cameraPos = playerCar.transform.position;
             // Make camera not be on the player
             cameraPos.z = cameraDistance;
-			cameraPos.y += 3;
+			cameraPos.y += 6;
 
             Camera.main.transform.position = Vector3.MoveTowards(Camera.main.transform.position, cameraPos, 1);
 
-            speedText.text = rb.velocity.magnitude.ToString("F2") + " m/s";
+            //speedText.text = rb.velocity.magnitude.ToString("F2") + " m/s";
+            speedText.text = "Time Left: " + currentTime.ToString("f2") + " s";
 
             // Max rotation
             Debug.Log(playerCar.transform.eulerAngles.x);
